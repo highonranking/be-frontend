@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import BackButton from '@/components/BackButton';
 import { externalContentAPI } from '@/lib/api';
 import { ExternalContent } from '@/types';
 
@@ -26,8 +27,8 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen bg-terminal-bg">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="text-4xl mb-12 neon-text-green">
-          <span className="glowing-text">{'> '}</span>
+        <h1 className="text-4xl mb-12 neon-text-green flex items-center">
+          <BackButton />
           github_projects
         </h1>
 

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import BackButton from '@/components/BackButton';
 import { blogAPI, externalContentAPI } from '@/lib/api';
 import { BlogPost } from '@/types';
 
@@ -46,7 +47,7 @@ export default function BlogPage() {
     <div className="min-h-screen bg-terminal-bg">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <h1 className="text-4xl mb-12 neon-text-green">
-          <span className="glowing-text">{'> '}</span>
+         <BackButton />
           blog_posts & articles
         </h1>
 

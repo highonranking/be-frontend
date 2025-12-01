@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import BackButton from '@/components/BackButton';
 import Link from 'next/link';
 import { useAuthStore } from '@/store/authStore';
 import { blogAPI } from '@/lib/api';
@@ -46,8 +47,8 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-terminal-bg">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="text-4xl mb-8 neon-text-green">
-          <span className="glowing-text">{'> '}</span>
+        <h1 className="text-4xl mb-8 neon-text-green flex items-center">
+          <BackButton />
           admin_panel
         </h1>
 

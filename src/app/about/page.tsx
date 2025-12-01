@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import BackButton from '@/components/BackButton';
 import { usePortfolioStore } from '@/store/portfolioStore';
 
 export default function AboutPage() {
@@ -9,8 +10,8 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-terminal-bg text-terminal-text">
       <div className="max-w-3xl mx-auto px-4 py-12">
-        <h1 className="text-4xl mb-8 neon-text-green">
-          <span className="glowing-text">{'>'}</span> about
+        <h1 className="text-4xl mb-8 neon-text-green flex items-center">
+          <BackButton /> about
         </h1>
         {portfolio ? (
           <div className="terminal-border p-8">
