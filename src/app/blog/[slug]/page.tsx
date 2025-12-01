@@ -69,7 +69,7 @@ export default function BlogDetailPage() {
 
         {/* Blog Header */}
         <header className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 neon-text-green">
+          <h1 className="text-3xl md:text-4xl font-semibold mb-4 text-terminal-text">
             {blog.title}
           </h1>
           
