@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import BlogEditorComponent from '@/components/BlogEditor';
 
 export default function CreateBlogPage() {
