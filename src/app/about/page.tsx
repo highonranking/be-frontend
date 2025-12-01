@@ -34,9 +34,11 @@ export default function AboutPage() {
             </ul>
 
             <h3 className="text-xl font-semibold mb-2 neon-text-green">Education</h3>
-            <h2 className="text-2xl font-bold mb-4 neon-text-cyan">{portfolio.education?.institution}</h2>
-            <p className="mb-4 text-lg">{portfolio.education?.degree} ({portfolio.education?.graduationDate})</p>
-            <p className="mb-6">GPA/CGPA: {portfolio.education?.gpaCgpa}</p>
+            <div className="mb-4">
+              <div className="font-semibold">{portfolio.education?.institution}</div>
+              <div className="text-sm opacity-70">{portfolio.education?.degree} ({portfolio.education?.graduationDate})</div>
+              <div className="text-sm">GPA/CGPA: {portfolio.education?.gpaCgpa}</div>
+            </div>
 
             <h3 className="text-xl font-semibold mb-2 neon-text-green">Contact</h3>
             <ul className="mb-4">
