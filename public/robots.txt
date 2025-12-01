@@ -1,0 +1,13 @@
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.abhinavdixit.com/sitemap.xml
+
+# Crawl-delay for all bots
+Crawl-delay: 0
+
+# Disallow specific paths (if any)
+# Disallow: /api/
+# Disallow: /admin/

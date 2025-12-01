@@ -21,14 +21,15 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 py-8">
         <section className="mb-12">
           <div className="terminal-border p-8 mb-6">
+            <h1 className="sr-only">Abhinav Dixit - Software Developer, Frontend Engineer, React Expert</h1>
             <div className="text-terminal-text mb-4">
               <span className="glowing-text">{'> '}</span>
               <span className="neon-text-green">abhinav@portfolio:~$</span>
               <span className="ml-2">whoami</span>
             </div>
             <div className="text-terminal-text opacity-75 mb-4 ml-4">
-              <span className="neon-text-cyan">Abhinav Dixit</span>
-              <span className="ml-2">| Software Development Engineer</span>
+              <span className="neon-text-cyan"><strong>Abhinav Dixit</strong></span>
+              <span className="ml-2">| <strong>Software Development Engineer</strong> | <strong>Frontend Developer</strong></span>
             </div>
             <div className="text-terminal-text opacity-75 mb-4">
               <span className="glowing-text">{'> '}</span>
@@ -36,7 +37,7 @@ export default function Home() {
               <span className="ml-2">cat experience.txt</span>
             </div>
             <div className="text-terminal-text opacity-60 mb-4 ml-4">
-              <span>3+ years building scalable web applications at Yatra, StampMy Visa & CRED</span>
+              <span>3+ years building scalable web applications at <strong>Yatra</strong>, <strong>StampMy Visa</strong> & <strong>CRED</strong></span>
             </div>
             <div className="text-terminal-text opacity-75 mb-2">
               <span className="glowing-text">{'> '}</span>
@@ -44,10 +45,10 @@ export default function Home() {
               <span className="ml-2">./tech-stack.sh</span>
             </div>
             <div className="text-terminal-text opacity-50 ml-4">
-              <span className="neon-text-magenta">⚡</span> Frontend Specialist: React • Next.js • TypeScript • JavaScript • AngularJS<br />
+              <span className="neon-text-magenta">⚡</span> <strong>Frontend Specialist</strong>: React • Next.js • TypeScript • JavaScript • AngularJS<br />
               <span className="neon-text-cyan">🎨</span> Frontend System Design • UI/UX Optimization • Performance Engineering<br />
               <span className="neon-text-yellow">☁️</span> Backend & Cloud: Spring Boot • Node.js • AWS • Docker • MongoDB<br />
-              <span className="neon-text-green">🏆</span> Competitive Programming: 5⭐ CodeChef (1926*) • 600+ LeetCode
+              <span className="neon-text-green">🏆</span> <strong>Competitive Programming</strong>: 5⭐ CodeChef (1926*) • 600+ LeetCode
             </div>
           </div>
         </section>
@@ -55,6 +56,7 @@ export default function Home() {
         {/* Portfolio Summary */}
         {portfolio && (
           <section className="terminal-border p-6 mb-12">
+            <h2 className="sr-only">Abhinav Dixit - Software Developer Portfolio Overview</h2>
             <div className="flex flex-wrap gap-6">
               <div>
                 <h3 className="neon-text-green text-sm mb-1">$ stats</h3>
@@ -113,20 +115,20 @@ export default function Home() {
 
         {/* Featured Sections */}
         <div className="grid md:grid-cols-3 gap-6 mb-12">
-          <div className="terminal-border terminal-border-hover p-6 cursor-pointer">
-            <h3 className="neon-text-cyan mb-4">$ frontend.expertise</h3>
-            <p className="text-sm opacity-75">React • Next.js • System Design • Performance Optimization</p>
-          </div>
+          <a href="/portfolio" className="terminal-border terminal-border-hover p-6 cursor-pointer">
+            <h2 className="neon-text-cyan mb-4">$ frontend.expertise</h2>
+            <p className="text-sm opacity-75"><strong>React</strong> • <strong>Next.js</strong> • System Design • Performance Optimization</p>
+          </a>
           
-          <div className="terminal-border terminal-border-hover p-6 cursor-pointer">
-            <h3 className="neon-text-purple mb-4">$ projects.showcase</h3>
+          <a href="/projects" className="terminal-border terminal-border-hover p-6 cursor-pointer">
+            <h2 className="neon-text-purple mb-4">$ projects.showcase</h2>
             <p className="text-sm opacity-75">Full-stack applications with modern frontend architecture</p>
-          </div>
+          </a>
 
-          <div className="terminal-border terminal-border-hover p-6 cursor-pointer">
-            <h3 className="neon-text-green mb-4">$ articles.latest</h3>
+          <a href="/blog" className="terminal-border terminal-border-hover p-6 cursor-pointer">
+            <h2 className="neon-text-green mb-4">$ articles.latest</h2>
             <p className="text-sm opacity-75">Frontend best practices and system design insights</p>
-          </div>
+          </a>
         </div>
 
         {loading && !portfolio && (
