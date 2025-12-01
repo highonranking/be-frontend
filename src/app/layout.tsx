@@ -106,9 +106,9 @@ export default function RootLayout({
               image: 'https://www.abhinavdixit.com/profile.jpg',
               sameAs: [
                 'https://github.com/highonranking',
-                'https://www.linkedin.com/in/abhinav-dixit-ba4662191',
                 'https://www.linkedin.com/in/highonranking/',
-                'https://www.codechef.com/users/dixit_abhinav',
+                'https://leetcode.com/u/highonranking/',
+                'https://www.codechef.com/users/abhinav230601',
               ],
               jobTitle: 'Software Development Engineer',
               worksFor: {
