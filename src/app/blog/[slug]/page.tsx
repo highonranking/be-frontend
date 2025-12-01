@@ -110,13 +110,13 @@ export default function BlogDetailPage() {
         <div className="terminal-border p-8 mb-8">
           {typeof blog.content === 'string' ? (
             <div className="prose prose-invert max-w-none">
-              {blog.content.split('\n').map((paragraph, idx) => (
+              {(blog.content as string).split('\n').map((paragraph: string, idx: number) => (
                 <p key={idx} className="mb-4 text-terminal-text leading-relaxed">
                   {paragraph}
                 </p>
               ))}
             </div>
-          ) : (
+          ) : Array.isArray(blog.content) ? (
             <div className="prose prose-invert max-w-none">
               {blog.content.map((block: any, idx: number) => {
                 switch (block.type) {
@@ -160,6 +160,8 @@ export default function BlogDetailPage() {
                 }
               })}
             </div>
+          ) : (
+            <div className="text-center opacity-50">No content available</div>
           )}
         </div>
 
