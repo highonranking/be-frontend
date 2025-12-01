@@ -107,7 +107,9 @@ export default function AdminPage() {
                     </p>
                   </div>
                   <div className="flex gap-2">
-                    <button className="px-3 py-1 border border-neon-green text-sm">Edit</button>
+                    <Link href={`/admin/blog/edit/${blog._id}`} className="px-3 py-1 border border-neon-green text-sm">
+                      Edit
+                    </Link>
                     <button className="px-3 py-1 border border-neon-pink text-sm">Delete</button>
                   </div>
                 </div>
