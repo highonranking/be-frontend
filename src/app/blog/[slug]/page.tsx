@@ -1,10 +1,13 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import BackButton from '@/components/BackButton';
 import { blogAPI } from '@/lib/api';
 import { BlogPost } from '@/types';
 import { useParams } from 'next/navigation';
+
+const TiptapReadOnly = dynamic(() => import('@/components/TiptapReadOnly'), { ssr: false });
 
 export default function BlogDetailPage() {
   const params = useParams();
@@ -108,7 +111,10 @@ export default function BlogDetailPage() {
 
         {/* Blog Content */}
         <div className="terminal-border p-8 mb-8">
-          {typeof blog.content === 'string' ? (
+          {/* Render TipTap JSON if detected */}
+          {blog.content && typeof blog.content === 'object' && blog.content.type === 'doc' ? (
+            <TiptapReadOnly content={blog.content} />
+          ) : typeof blog.content === 'string' ? (
             <div className="prose prose-invert max-w-none">
               {(blog.content as string).split('\n').map((paragraph: string, idx: number) => (
                 <p key={idx} className="mb-4 text-terminal-text leading-relaxed">
