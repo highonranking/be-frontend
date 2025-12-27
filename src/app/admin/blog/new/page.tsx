@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import BackButton from '@/components/BackButton';
 import { useAuthStore } from '@/store/authStore';
 import Link from 'next/link';
 import { blogAPI } from '@/lib/api';
+const RichTextEditor = dynamic(() => import('@/components/RichTextEditor'), { ssr: false });
 import { useRouter } from 'next/navigation';
 
 export default function AdminNewBlogPage() {
@@ -12,13 +14,14 @@ export default function AdminNewBlogPage() {
   const user = useAuthStore((state) => state.user);
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState<any>(null);
   const [tags, setTags] = useState('');
   const [published, setPublished] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const handleSave = async () => {
-    if (!title.trim() || !content.trim()) {
+
+    if (!title.trim() || !content || (typeof content === 'string' ? !content.trim() : !content?.content?.length)) {
       alert('Title and content are required');
       return;
     }
@@ -75,12 +78,9 @@ export default function AdminNewBlogPage() {
 
           <div>
             <label className="block mb-2 text-neon-cyan">Content</label>
-            <textarea
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              className="w-full bg-terminal-bg border border-neon-green p-3 text-terminal-text min-h-96"
-              placeholder="Write your blog content here..."
-            />
+            <div className="bg-terminal-bg border border-neon-green rounded">
+              <RichTextEditor value={content} onChange={setContent} />
+            </div>
           </div>
 
           <div>
