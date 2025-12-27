@@ -112,7 +112,10 @@ export default function BlogDetailPage() {
         {/* Blog Content */}
         <div className="terminal-border p-8 mb-8">
           {/* Render TipTap JSON if detected */}
-          {blog.content && typeof blog.content === 'object' && blog.content.type === 'doc' ? (
+          {blog.content &&
+            typeof blog.content === 'object' &&
+            !Array.isArray(blog.content) &&
+            (blog.content as any).type === 'doc' ? (
             <TiptapReadOnly content={blog.content} />
           ) : typeof blog.content === 'string' ? (
             <div className="prose prose-invert max-w-none">
