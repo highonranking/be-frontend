@@ -1,4 +1,13 @@
-'use client';
+"use client";
+
+// Helper to extract plain text from TipTap JSON
+function extractTextFromTiptap(content: any): string {
+  if (!content || typeof content !== 'object') return '';
+  if (Array.isArray(content)) return content.map(extractTextFromTiptap).join(' ');
+  if (content.type === 'text' && content.text) return content.text;
+  if (content.content) return extractTextFromTiptap(content.content);
+  return '';
+}
 
 import React, { useState, useEffect } from 'react';
 import BackButton from '@/components/BackButton';
@@ -122,7 +131,16 @@ export default function BlogPage() {
                   />
                 )}
                 <h3 className="text-lg font-bold mb-2 neon-text-cyan">{item.title}</h3>
-                <p className="text-sm opacity-75 mb-4">{item.excerpt || item.description?.substring(0, 150)}</p>
+                <p className="text-sm opacity-75 mb-4">
+                  {item.excerpt
+                    || (typeof item.content === 'string'
+                      ? item.content.slice(0, 180)
+                      : Array.isArray(item.content)
+                        ? item.content.map((b: any) => b.text).filter(Boolean).join(' ').slice(0, 180)
+                        : (item.content && item.content.type === 'doc')
+                          ? extractTextFromTiptap(item.content).slice(0, 180)
+                          : item.description?.substring(0, 150))}
+                </p>
                 <div className="flex justify-between items-center text-xs opacity-50">
                   <span>{new Date(item.createdAt || item.publishedAt).toLocaleDateString()}</span>
                   {item.source === 'blog' && <span>👁️ {item.views} | ❤️ {item.likes}</span>}
