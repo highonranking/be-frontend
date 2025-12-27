@@ -1,0 +1,21 @@
+{
+  "_id": "6931b1cd2c5b66aadf340f9d",
+  "title": "useOptimistic for Real-World Airline UX",
+  "slug": "useoptimistic-for-real-world-airline-ux",
+  "excerpt": "In flight booking systems, UI speed directly impacts conversion.\n\nBut not every feature in aviation can be made optimistic; seats and tickets have str...",
+  "content": "In flight booking systems, UI speed directly impacts conversion.\n\nBut not every feature in aviation can be made optimistic; seats and tickets have strict backend guarantees (GDS/NDC), so the UI must wait.\n\nWhere useOptimistic does shine is in dynamic fare upgrades:\n\nWhen a traveler switches from Saver → Flex, the backend triggers:\n\n1. A fresh pricing call\n\n2. Availability re-validation\n\n3. Ancillary recalculation\n\nThat can easily be 1+ seconds on a busy airport route.\n\nWith useOptimistic, we update:\n✔ Price visualization\n✔ Included bags and meals\n✔ Change/cancellation rules\n\ninstantly — before the server responds.\n\nIf the backend returns a mismatch (e.g., fare jump), React rolls back gracefully with a notification.\n\nUsers perceive “premium upgrade” as fast and delightful.\nThe business sees higher upsell success.\nNo inventory risk.\nWin-win.\n\nReact 19 isn’t just DX sugar.\nIt’s driving UX where every millisecond matters, especially in aviation.",
+  "tags": [
+    "useOptimistic",
+    "react",
+    "abhinavdixit",
+    "optimization",
+    "flights"
+  ],
+  "published": true,
+  "featured": false,
+  "views": 13,
+  "likes": 24,
+  "createdAt": "2025-12-04T16:07:41.596Z",
+  "updatedAt": "2025-12-04T16:07:41.596Z",
+  "__v": 0
+}

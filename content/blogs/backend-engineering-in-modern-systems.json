@@ -1,0 +1,22 @@
+{
+  "_id": "692df1fb8f1c5056a91443ee",
+  "title": "Backend Engineering in Modern Systems.",
+  "slug": "backend-engineering-in-modern-systems",
+  "excerpt": "Backend engineers don’t just write APIs — they design ecosystems.\n\nThey architect the invisible highways where data moves, transforms, validates, and...",
+  "content": "Backend engineers don’t just write APIs — they design ecosystems.\n\nThey architect the invisible highways where data moves, transforms, validates, and persists — reliably, securely, and at scale.\n\nThey think in flows, not functions:\nrequest → governance → processing → storage → recovery.\nEvery stage predictable, observable, and fault-tolerant.\n\nThey treat the backend as a network of living components —\ndatabases, caches, queues, services, replicas —\neach with its own contract, latency, and failure modes.\n\nAnd they know that true scalability isn’t just about faster queries or bigger servers;\nit comes from idempotency, isolation, data integrity, and smart concurrency control.\n\nModern backend isn’t just CRUD.\nIt’s consistency models, distributed locks, dead-letter queues, circuit breakers, trace propagation,\nand systems that self-heal long before humans wake up.\n\nBecause in today’s architectures — fintech, travel tech, logistics, marketplaces —\nthe backend isn’t a black box running on a server.\nIt’s a constantly evolving nervous system, coordinating every part of the product at once.\n\nBackend engineers build more than services —\nthey build trust,\none endpoint, one invariant, one guarantee at a time.",
+  "tags": [
+    "react",
+    "js",
+    "abhinavdixit",
+    "frontend",
+    "backend",
+    "system design"
+  ],
+  "published": true,
+  "featured": false,
+  "views": 8,
+  "likes": 1,
+  "createdAt": "2025-12-01T19:52:27.923Z",
+  "updatedAt": "2025-12-01T19:55:58.981Z",
+  "__v": 0
+}
