@@ -1,62 +1,38 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
+import BlogTiptapReadOnly from '@/components/BlogTiptapReadOnly';
+import BlogActions from '@/components/BlogActions';
 import BackButton from '@/components/BackButton';
-import { blogAPI } from '@/lib/api';
 import { BlogPost } from '@/types';
-import { useParams } from 'next/navigation';
 
-const TiptapReadOnly = dynamic(() => import('@/components/TiptapReadOnly'), { ssr: false });
 
-export default function BlogDetailPage() {
-  const params = useParams();
-  const slug = params.slug as string;
-  const [blog, setBlog] = useState<BlogPost | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
 
-  useEffect(() => {
-    const fetchBlog = async () => {
-      try {
-        const response = await blogAPI.getPostBySlug(slug);
-        setBlog(response.data);
-      } catch (error: any) {
-        console.error('Error fetching blog:', error);
-        setError('Blog post not found');
-      } finally {
-        setLoading(false);
-      }
-    };
+export const revalidate = 60; // Revalidate every 60 seconds
 
-    if (slug) {
-      fetchBlog();
-    }
-  }, [slug]);
+interface BlogDetailPageProps {
+  params: { slug: string };
+}
 
-  const handleLike = async () => {
-    if (!blog) return;
-    try {
-      await blogAPI.likePost(blog._id);
-      setBlog({ ...blog, likes: blog.likes + 1 });
-    } catch (error) {
-      console.error('Error liking post:', error);
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-terminal-bg flex items-center justify-center">
-        <div className="terminal-border p-8">Loading blog post...</div>
-      </div>
-    );
+async function getBlog(slug: string): Promise<BlogPost | null> {
+  try {
+    if (!process.env.NEXT_PUBLIC_API_URL) throw new Error('NEXT_PUBLIC_API_URL is not set');
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs/${slug}`, {
+      next: { revalidate },
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    return null;
   }
+}
 
-  if (error || !blog) {
+export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
+  const blog = await getBlog(params.slug);
+
+  if (!blog) {
     return (
       <div className="min-h-screen bg-terminal-bg flex items-center justify-center">
         <div className="terminal-border p-8 text-center">
-          <p className="mb-4 text-neon-pink">{error || 'Blog post not found'}</p>
+          <p className="mb-4 text-neon-pink">Blog post not found</p>
           <BackButton />
         </div>
       </div>
@@ -109,6 +85,7 @@ export default function BlogDetailPage() {
           )}
         </header>
 
+
         {/* Blog Content */}
         <div className="terminal-border p-8 mb-8">
           {/* Render TipTap JSON if detected */}
@@ -116,7 +93,7 @@ export default function BlogDetailPage() {
             typeof blog.content === 'object' &&
             !Array.isArray(blog.content) &&
             (blog.content as any).type === 'doc' ? (
-            <TiptapReadOnly content={blog.content} />
+            <BlogTiptapReadOnly content={blog.content} />
           ) : typeof blog.content === 'string' ? (
             <div className="prose prose-invert max-w-none">
               {(blog.content as string).split('\n').map((paragraph: string, idx: number) => (
@@ -174,25 +151,8 @@ export default function BlogDetailPage() {
           )}
         </div>
 
-        {/* Actions */}
-        <div className="flex gap-4 mb-8">
-          <button
-            onClick={handleLike}
-            className="px-6 py-2 border border-neon-pink text-neon-pink hover:bg-neon-pink hover:text-terminal-bg transition-colors"
-          >
-            ❤️ Like ({blog.likes})
-          </button>
-          <button
-            onClick={() => {
-              const url = window.location.href;
-              navigator.clipboard.writeText(url);
-              alert('Link copied to clipboard!');
-            }}
-            className="px-6 py-2 border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-terminal-bg transition-colors"
-          >
-            🔗 Share
-          </button>
-        </div>
+        {/* Actions (Like/Share) - Client-side only */}
+        <BlogActions blogId={blog._id} initialLikes={blog.likes} />
 
         {/* Back to Blog List */}
         <div className="text-center pt-8 border-t border-neon-green">
