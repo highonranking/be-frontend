@@ -10,7 +10,7 @@ export default function BackButton() {
       type="button"
       aria-label="Go back"
       onClick={() => router.back()}
-      className="glowing-text mr-2 hover:text-neon-cyan focus:outline-none"
+  className="glowing-text mr-2 !text-[#181A20] hover:text-neon-green focus:outline-none"
     >
       {'>'}
     </button>
