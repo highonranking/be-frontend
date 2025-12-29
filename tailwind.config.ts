@@ -9,12 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'neon-green': '#00ff00',
-        'neon-pink': '#ff00ff',
-        'neon-blue': '#00ffff',
-        'neon-purple': '#8b00ff',
-        'terminal-bg': '#0a0e27',
-        'terminal-text': '#0eff00',
+        // Improved contrast colors
+        'neon-green': '#39FF14', // Brighter, more readable green
+        'neon-pink': '#FF3EC8',
+        'neon-blue': '#1FB6FF', // Brighter blue for better contrast
+        'neon-purple': '#A259F7', // Brighter purple
+        'terminal-bg': '#181A20', // Slightly lighter for better contrast
+        'terminal-text': '#E2FFE2', // Off-white green for better readability
       },
       fontFamily: {
         mono: ['Fira Code', 'Courier New', 'monospace'],
