@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import BackButton from '@/components/BackButton';
 import Link from 'next/link';
 import { useAuthStore } from '@/store/authStore';
-import { blogAPI } from '@/lib/api';
+import { blogAPI, externalContentAPI } from '@/lib/api';
 import { BlogPost } from '@/types';
 
 export default function AdminPage() {
@@ -12,6 +12,21 @@ export default function AdminPage() {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [syncStatus, setSyncStatus] = useState<string | null>(null);
+  const [syncLoading, setSyncLoading] = useState<string | null>(null);
+
+  const handleSync = async (type: 'medium' | 'github' | 'linkedin') => {
+    setSyncLoading(type);
+    setSyncStatus(null);
+    try {
+      await externalContentAPI.syncContent(type);
+      setSyncStatus(`${type === 'medium' ? 'Medium Blogs' : 'GitHub Repos'} synced successfully!`);
+    } catch (error) {
+      setSyncStatus(`Failed to sync ${type === 'medium' ? 'Medium Blogs' : 'GitHub Repos'}.`);
+    } finally {
+      setSyncLoading(null);
+    }
+  };
 
   useEffect(() => {
     if (!isLoggedIn || user?.role !== 'admin') {
@@ -147,10 +162,28 @@ export default function AdminPage() {
           <div className="space-y-6">
             <div className="terminal-border p-6">
               <h3 className="text-lg mb-4 neon-text-purple">Sync External Content</h3>
-              <button className="bg-neon-green text-terminal-bg px-6 py-2 mr-4">
-                Sync Medium Blogs
+              <button
+                className="bg-neon-green text-terminal-bg px-6 py-2 mr-4"
+                onClick={() => handleSync('medium')}
+                disabled={syncLoading === 'medium'}
+              >
+                {syncLoading === 'medium' ? 'Syncing...' : 'Sync Medium Blogs'}
               </button>
-              <button className="bg-neon-cyan text-terminal-bg px-6 py-2">Sync GitHub Repos</button>
+              <button
+                className="bg-neon-cyan text-terminal-bg px-6 py-2 mr-4"
+                onClick={() => handleSync('github')}
+                disabled={syncLoading === 'github'}
+              >
+                {syncLoading === 'github' ? 'Syncing...' : 'Sync GitHub Repos'}
+              </button>
+              <button
+                className="bg-neon-purple text-terminal-bg px-6 py-2"
+                onClick={() => handleSync('linkedin')}
+                disabled={syncLoading === 'linkedin'}
+              >
+                {syncLoading === 'linkedin' ? 'Syncing...' : 'Sync LinkedIn Posts'}
+              </button>
+              {syncStatus && <div className="mt-4 text-sm text-neon-green">{syncStatus}</div>}
             </div>
           </div>
         )}
