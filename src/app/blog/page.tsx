@@ -220,23 +220,25 @@ export default function BlogPage() {
                 {isLinkedIn && (
                   <span className="text-xs px-2 py-1 bg-blue-600 text-white rounded mb-2 inline-block">LinkedIn</span>
                 )}
-                {item.thumbnail && (
+                {(isLinkedIn ? item.imageUrl : item.thumbnail) && (
                   <img
-                    src={item.thumbnail}
+                    src={isLinkedIn ? item.imageUrl : item.thumbnail}
                     alt={item.title}
                     className="w-full h-40 object-cover mb-4 border border-neon-green opacity-50"
                   />
                 )}
                 <h3 className="text-lg font-bold mb-2 neon-text-cyan">{item.title}</h3>
                 <p className="text-sm opacity-75 mb-4">
-                  {item.excerpt
-                    || (typeof item.content === 'string'
-                      ? item.content.slice(0, 180)
-                      : Array.isArray(item.content)
-                        ? item.content.map((b: any) => b.text).filter(Boolean).join(' ').slice(0, 180)
-                        : (item.content && item.content.type === 'doc')
-                          ? extractTextFromTiptap(item.content).slice(0, 180)
-                          : item.description?.substring(0, 150))}
+                  {isLinkedIn
+                    ? item.description?.substring(0, 150)
+                    : item.excerpt
+                      || (typeof item.content === 'string'
+                        ? item.content.slice(0, 180)
+                        : Array.isArray(item.content)
+                          ? item.content.map((b: any) => b.text).filter(Boolean).join(' ').slice(0, 180)
+                          : (item.content && item.content.type === 'doc')
+                            ? extractTextFromTiptap(item.content).slice(0, 180)
+                            : item.description?.substring(0, 150))}
                 </p>
                 <div className="flex justify-between items-center text-xs opacity-50">
                   <span>{new Date(item.createdAt || item.publishedAt).toLocaleDateString()}</span>
