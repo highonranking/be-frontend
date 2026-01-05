@@ -10,6 +10,7 @@ function extractTextFromTiptap(content: any): string {
 }
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import Head from 'next/head';
 import BackButton from '@/components/BackButton';
 import { blogAPI, externalContentAPI } from '@/lib/api';
 import { BlogPost } from '@/types';
@@ -149,13 +150,28 @@ export default function BlogPage() {
   // Pagination controls
   // const totalPages = Math.ceil((pagination?.total || 0) / limit);
 
+  // ...existing code...
+  // Import Head for Next.js
+  // import Head from 'next/head';
+  // If not imported, add:
+  // import Head from 'next/head';
   return (
-    <div className="min-h-screen bg-terminal-bg">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="text-4xl mb-12 neon-text-green">
-         <BackButton />
-          blog_posts & articles
-        </h1>
+    <>
+      {/* SEO Head tags for Next.js */}
+      <Head>
+        <title>Blog | Abhinav Dixit</title>
+        <meta name="description" content="Read insightful blog posts and articles by Abhinav Dixit on technology, career, and personal growth." />
+        <link rel="canonical" href="https://www.abhinavdixit.com/blog" />
+      </Head>
+      <div className="min-h-screen bg-terminal-bg">
+        <div className="max-w-7xl mx-auto px-4 py-8">
+          <h1 className="text-4xl mb-12 neon-text-green">
+            <BackButton />
+            blog_posts & articles
+          </h1>
+          <div className="mb-8 p-4 bg-terminal-bg border border-neon-green rounded text-lg text-terminal-fg">
+            Welcome to the blog! Here you'll find articles, tutorials, and insights from Abhinav Dixit on software engineering, technology trends, and personal development. Explore the latest posts below.
+          </div>
 
         {/* Tab Filter */}
         <div className="mb-8 flex gap-4">
@@ -269,5 +285,6 @@ export default function BlogPage() {
         )}
       </div>
     </div>
+    </>
   );
 }
