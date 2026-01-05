@@ -94,6 +94,9 @@ export default function RootLayout({
         <meta name="author" content="Abhinav Dixit" />
         <meta name="copyright" content="Abhinav Dixit" />
         <meta property="og:locale" content="en_US" />
+        {/* Google AdSense */}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2589198485117959" crossOrigin="anonymous"></script>
+        {/* ...existing structured data scripts... */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
